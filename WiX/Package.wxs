@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="GraphCombEx" Manufacturer="DC"
+           Version="1.0.0" UpgradeCode="0818dd8c-3801-4e07-804c-e4678fb1951a">
+    <!--<UIRef Id="WixUI_InstallDir" />-->
+
+	  <Directory Id="ProgramFiles64Folder">
+		<Directory Id="INSTALLFOLDER" Name="GraphCombEx">
+          <Directory Id="IconEnginesDir" Name="iconengines" />
+          <Directory Id="ImageFormatsDir" Name="imageformats" />
+          <Directory Id="PlatformsDir" Name="platforms" />
+          <Directory Id="TranslationsDir" Name="translations" />
+		</Directory>
+	  </Directory>
+
+    <Feature Id="DefaultFeature" Title="GraphCombEx" Level="1">
+      <ComponentGroupRef Id="MainComponents" />
+      <ComponentGroupRef Id="IconEnginesComponents" />
+      <ComponentGroupRef Id="ImageFormatsComponents" />
+      <ComponentGroupRef Id="PlatformsComponents" />
+      <ComponentGroupRef Id="TranslationsComponents" />
+    </Feature>
+  </Package>
+
+  <Fragment>
+    <ComponentGroup Id="MainComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmp_D3Dcompiler" Guid="*">
+        <File Source="D3Dcompiler_47.dll" />
+      </Component>
+      <Component Id="cmp_GraphCombEx" Guid="*">
+        <File Source="GraphCombEx.exe" />
+      </Component>
+      <Component Id="cmp_libEGL" Guid="*">
+        <File Source="libEGL.dll" />
+      </Component>
+      <Component Id="cmp_libgcc" Guid="*">
+        <File Source="libgcc_s_seh-1.dll" />
+      </Component>
+      <Component Id="cmp_libGLESV2" Guid="*">
+        <File Source="libGLESV2.dll" />
+      </Component>
+      <Component Id="cmp_libstdcxx" Guid="*">
+        <File Source="libstdc++-6.dll" />
+      </Component>
+      <Component Id="cmp_libwinpthread" Guid="*">
+        <File Source="libwinpthread-1.dll" />
+      </Component>
+      <Component Id="cmp_Qt5Core" Guid="*">
+        <File Source="Qt5Core.dll" />
+      </Component>
+      <Component Id="cmp_Qt5Gui" Guid="*">
+        <File Source="Qt5Gui.dll" />
+      </Component>
+      <Component Id="cmp_Qt5Svg" Guid="*">
+        <File Source="Qt5Svg.dll" />
+      </Component>
+      <Component Id="cmp_Qt5Widgets" Guid="*">
+        <File Source="Qt5Widgets.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="IconEnginesComponents" Directory="IconEnginesDir">
+      <Component Id="cmp_qsvgicon" Guid="*">
+        <File Source="iconengines\qsvgicon.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ImageFormatsComponents" Directory="ImageFormatsDir">
+      <Component Id="cmp_qgif" Guid="*">
+        <File Source="imageformats\qgif.dll" />
+      </Component>
+      <Component Id="cmp_qicns" Guid="*">
+        <File Source="imageformats\qicns.dll" />
+      </Component>
+      <Component Id="cmp_qico" Guid="*">
+        <File Source="imageformats\qico.dll" />
+      </Component>
+      <Component Id="cmp_qjp2" Guid="*">
+        <File Source="imageformats\qjp2.dll" />
+      </Component>
+      <Component Id="cmp_qjpeg" Guid="*">
+        <File Source="imageformats\qjpeg.dll" />
+      </Component>
+      <Component Id="cmp_qmng" Guid="*">
+        <File Source="imageformats\qmng.dll" />
+      </Component>
+      <Component Id="cmp_qsvg" Guid="*">
+        <File Source="imageformats\qsvg.dll" />
+      </Component>
+      <Component Id="cmp_qtga" Guid="*">
+        <File Source="imageformats\qtga.dll" />
+      </Component>
+      <Component Id="cmp_qtiff" Guid="*">
+        <File Source="imageformats\qtiff.dll" />
+      </Component>
+      <Component Id="cmp_qwbmp" Guid="*">
+        <File Source="imageformats\qwbmp.dll" />
+      </Component>
+      <Component Id="cmp_qwebp" Guid="*">
+        <File Source="imageformats\qwebp.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="PlatformsComponents" Directory="PlatformsDir">
+      <Component Id="cmp_qwindows" Guid="*">
+        <File Source="platforms\qwindows.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="TranslationsComponents" Directory="TranslationsDir">
+      <Component Id="cmp_qt_ca" Guid="*">
+        <File Source="translations\qt_ca.qm" />
+      </Component>
+      <Component Id="cmp_qt_cs" Guid="*">
+        <File Source="translations\qt_cs.qm" />
+      </Component>
+      <Component Id="cmp_qt_de" Guid="*">
+        <File Source="translations\qt_de.qm" />
+      </Component>
+      <Component Id="cmp_qt_fi" Guid="*">
+        <File Source="translations\qt_fi.qm" />
+      </Component>
+      <Component Id="cmp_qt_fr" Guid="*">
+        <File Source="translations\qt_fr.qm" />
+      </Component>
+      <Component Id="cmp_qt_hu" Guid="*">
+        <File Source="translations\qt_hu.qm" />
+      </Component>
+      <Component Id="cmp_qt_it" Guid="*">
+        <File Source="translations\qt_it.qm" />
+      </Component>
+      <Component Id="cmp_qt_ja" Guid="*">
+        <File Source="translations\qt_ja.qm" />
+      </Component>
+      <Component Id="cmp_qt_ko" Guid="*">
+        <File Source="translations\qt_ko.qm" />
+      </Component>
+      <Component Id="cmp_qt_lv" Guid="*">
+        <File Source="translations\qt_lv.qm" />
+      </Component>
+      <Component Id="cmp_qt_ru" Guid="*">
+        <File Source="translations\qt_ru.qm" />
+      </Component>
+      <Component Id="cmp_qt_sk" Guid="*">
+        <File Source="translations\qt_sk.qm" />
+      </Component>
+      <Component Id="cmp_qt_uk" Guid="*">
+        <File Source="translations\qt_uk.qm" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
