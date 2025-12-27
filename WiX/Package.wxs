@@ -2,16 +2,21 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Package Name="GraphCombEx" Manufacturer="DC"
            Version="1.0.0" UpgradeCode="0818dd8c-3801-4e07-804c-e4678fb1951a">
-    <!--<UIRef Id="WixUI_InstallDir" />-->
+    <!-- Commented out UI for now. Uncomment & include WixUIExtension if you enable UI. -->
+    <!-- <UIRef Id="WixUI_InstallDir" /> -->
 
-	  <Directory Id="ProgramFiles64Folder">
-		<Directory Id="INSTALLFOLDER" Name="GraphCombEx">
-          <Directory Id="IconEnginesDir" Name="iconengines" />
-          <Directory Id="ImageFormatsDir" Name="imageformats" />
-          <Directory Id="PlatformsDir" Name="platforms" />
-          <Directory Id="TranslationsDir" Name="translations" />
-		</Directory>
-	  </Directory>
+    <!-- Make the common desktop folder identifier available in WiX v4 -->
+    <StandardDirectory Id="DesktopFolder" />
+
+    <!-- Install under Program Files (64-bit) -->
+    <Directory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="GraphCombEx">
+        <Directory Id="IconEnginesDir" Name="iconengines" />
+        <Directory Id="ImageFormatsDir" Name="imageformats" />
+        <Directory Id="PlatformsDir" Name="platforms" />
+        <Directory Id="TranslationsDir" Name="translations" />
+      </Directory>
+    </Directory>
 
     <Feature Id="DefaultFeature" Title="GraphCombEx" Level="1">
       <ComponentGroupRef Id="MainComponents" />
@@ -19,17 +24,22 @@
       <ComponentGroupRef Id="ImageFormatsComponents" />
       <ComponentGroupRef Id="PlatformsComponents" />
       <ComponentGroupRef Id="TranslationsComponents" />
+      <ComponentGroupRef Id="ShortcutComponents" />
     </Feature>
   </Package>
 
+  <!-- Main application files -->
   <Fragment>
     <ComponentGroup Id="MainComponents" Directory="INSTALLFOLDER">
       <Component Id="cmp_D3Dcompiler" Guid="*">
         <File Source="D3Dcompiler_47.dll" />
       </Component>
-      <Component Id="cmp_GraphCombEx" Guid="*">
+
+      <!-- EXE component (file-keyed) -->
+      <Component Id="cmp_GraphCombExExe" Guid="*">
         <File Source="GraphCombEx.exe" />
       </Component>
+
       <Component Id="cmp_libEGL" Guid="*">
         <File Source="libEGL.dll" />
       </Component>
@@ -60,6 +70,7 @@
     </ComponentGroup>
   </Fragment>
 
+  <!-- iconengines folder -->
   <Fragment>
     <ComponentGroup Id="IconEnginesComponents" Directory="IconEnginesDir">
       <Component Id="cmp_qsvgicon" Guid="*">
@@ -68,6 +79,7 @@
     </ComponentGroup>
   </Fragment>
 
+  <!-- imageformats folder -->
   <Fragment>
     <ComponentGroup Id="ImageFormatsComponents" Directory="ImageFormatsDir">
       <Component Id="cmp_qgif" Guid="*">
@@ -106,6 +118,7 @@
     </ComponentGroup>
   </Fragment>
 
+  <!-- platforms folder -->
   <Fragment>
     <ComponentGroup Id="PlatformsComponents" Directory="PlatformsDir">
       <Component Id="cmp_qwindows" Guid="*">
@@ -114,6 +127,7 @@
     </ComponentGroup>
   </Fragment>
 
+  <!-- translations folder -->
   <Fragment>
     <ComponentGroup Id="TranslationsComponents" Directory="TranslationsDir">
       <Component Id="cmp_qt_ca" Guid="*">
@@ -154,6 +168,29 @@
       </Component>
       <Component Id="cmp_qt_uk" Guid="*">
         <File Source="translations\qt_uk.qm" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <!-- Shortcut component group: registry-key KeyPath + non-advertised desktop shortcut -->
+  <Fragment>
+    <ComponentGroup Id="ShortcutComponents">
+      <Component Id="cmp_GraphCombExDesktopShortcut" Guid="*">
+        <!-- HKCU key is used as KeyPath so MSI rules are satisfied for non-advertised shortcuts -->
+        <RegistryValue Root="HKCU"
+                       Key="Software\DC\GraphCombEx"
+                       Name="Installed"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes" />
+
+        <!-- Non-advertised desktop shortcut pointing to the installed EXE -->
+        <Shortcut Id="DesktopShortcut"
+                  Directory="DesktopFolder"
+                  Name="GraphCombEx"
+                  Description="GraphCombEx"
+                  Target="[INSTALLFOLDER]GraphCombEx.exe"
+                  WorkingDirectory="INSTALLFOLDER" />
       </Component>
     </ComponentGroup>
   </Fragment>

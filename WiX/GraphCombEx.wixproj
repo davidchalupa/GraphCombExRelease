@@ -1,6 +1,14 @@
 <Project Sdk="WixToolset.Sdk/5.0.1">
   <PropertyGroup>
-    <!-- Ensure the platform is set to x64 if not explicitly specified -->
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+
+    <!-- Embed all files into the bundle EXE -->
+    <EmbedCab>true</EmbedCab>
+    <EmitWixPdb>false</EmitWixPdb>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Wix Include="Bundle.wxs" />
+  </ItemGroup>
 </Project>
