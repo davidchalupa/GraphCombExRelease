@@ -2,10 +2,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-
-    <!-- Embed all files into the bundle EXE -->
-    <EmbedCab>true</EmbedCab>
-    <EmitWixPdb>false</EmitWixPdb>
   </PropertyGroup>
 
   <ItemGroup>

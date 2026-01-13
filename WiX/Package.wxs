@@ -5,6 +5,8 @@
     <!-- Commented out UI for now. Uncomment & include WixUIExtension if you enable UI. -->
     <!-- <UIRef Id="WixUI_InstallDir" /> -->
 
+    <MediaTemplate EmbedCab="yes" />
+
     <!-- Make the common desktop folder identifier available in WiX v4 -->
     <StandardDirectory Id="DesktopFolder" />
 
